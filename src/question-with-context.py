@@ -1,13 +1,15 @@
 import json
-import os
 import re
 import requests
-from typing import Any, Dict, List, Tuple
+from typing import List
 
-# OpenAI API
-# Documentation: https://platform.openai.com/docs/api-reference
-SERVER_OPENAI_API = "api.openai.com"
-ENDPOINT_OPENAI_API_CHAT_COMPLETIONS = "/v1/chat/completions"
+from common.openai import (
+    SERVER_OPENAI_API,
+    ENDPOINT_OPENAI_API_CHAT_COMPLETIONS,
+    _init_session,
+    post_chat_completion,
+)
+
 
 prompt_template = """Answer the question truthfully using only the provided context, and if the question cannot be answered with the context, say "{idk}".
 
@@ -18,28 +20,6 @@ Context:
 
 Answer the question delimited by triple backticks: ```{question}```
 A:"""
-
-
-def _init_session() -> requests.Session:
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    if not OPENAI_API_KEY:
-        raise RuntimeError("OPENAI_API_KEY environment variable not set")
-    session = requests.Session()
-    session.headers.update(
-        {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {OPENAI_API_KEY}",
-        }
-    )
-    return session
-
-
-def post_chat_completion(
-    session: requests.Session, data: Dict[str, Any]
-) -> requests.Response:
-    path = ENDPOINT_OPENAI_API_CHAT_COMPLETIONS
-    url = f"https://{SERVER_OPENAI_API}{path}"
-    return session.post(url, data=json.dumps(data))
 
 
 def generate_prompt(context: str, question: str) -> str:
