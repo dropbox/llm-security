@@ -15,6 +15,17 @@ from common.openai import (
     post_chat_completion,
 )
 
+questions = (
+    "What is the name of the sentient computer from 2001: A Space Odyssey?",
+    # "What is the meaning of life?",
+    "What is the name of the 1982 sci-fi film featuring a computer program protagonist.",
+)
+max_tokens = {
+    "gpt-3.5-turbo": 2**12,
+    "gpt-3.5-turbo-16k": 2**14,
+    "gpt-4": 2**13,
+    "gpt-4-32k": 2**15,
+}
 
 control_sequences = set(
     # all 1-byte characters (i.e., '\b')
@@ -84,30 +95,34 @@ Please provide your response in the form of a Python Tuple[bool, str] as below:
 
 
 if __name__ == "__main__":
-    questions = (
-        "What is the name of the sentient computer from 2001: A Space Odyssey?",
-        # "What is the meaning of life?",
-        "What is the name of the 1982 sci-fi film featuring a computer program protagonist.",
+    parser = argparse.ArgumentParser(
+        description="Performs repeated control sequence experiments to determine strength of effect"
     )
-    # parser = argparse.ArgumentParser(description="Performs strength of experiments ", epilog='Text at the bottom of help')
-
-    # model = "gpt-3.5-turbo"
-    # max_sequences = 2 ** 12
-    model = "gpt-4"
-    max_sequences = 2**13
-    # model = "gpt-4-32k"
-    # max_sequences = 2 ** 15
+    parser.add_argument(
+        "model", help="OpenAI model to use in experiments", choices=max_tokens.keys()
+    )
+    parser.add_argument(
+        "--log2-diff-stop",
+        help="Resolution for stopping criteria",
+        type=float,
+        default=5.0,
+    )
+    args = parser.parse_args()
 
     session = _init_session()
 
     for control_sequence in control_sequences:
         okay = True
-        diff = max_sequences // 2
-        count = max_sequences // 2
-        while math.log2(count) <= math.log2(diff) + 5.0:
+        diff = max_tokens[args.model] // 2
+        count = max_tokens[args.model] // 2
+        while math.log2(count) <= math.log2(diff) + args.log2_diff_stop:
             try:
                 results = two_questions_one_prompt(
-                    session, questions[0], questions[1], control_sequence * count, model
+                    session,
+                    questions[0],
+                    questions[1],
+                    control_sequence * count,
+                    args.model,
                 )
                 answer = results["choices"][0]
                 # print(answer)
@@ -121,8 +136,8 @@ if __name__ == "__main__":
                 okay_str = str(okay)
             except RuntimeError as e:
                 prompt_tokens = 0
-                model_str = model
-                timestamp = None
+                model_str = args.model
+                timestamp = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
                 okay_str = "Error"
                 okay = False
                 reason = e
