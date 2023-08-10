@@ -36,6 +36,10 @@ control_sequences.update(
     set([f"\{chr(i)}" for i in range(256)])
 )
 control_sequences.update(
+    # all possible space-character sequences (i.e., ' \b')
+    set([f" {chr(i)}" for i in range(256)])
+)
+control_sequences.update(
     # additional 4-byte sequences (i.e., r'\x08')
     set([chr(i).encode("unicode_escape").decode() for i in range(256)])
 )
