@@ -16,9 +16,9 @@ from common.openai import (
 )
 
 questions = (
-    "What is the name of the sentient computer from 2001: A Space Odyssey?",
-    # "What is the meaning of life?",
-    "What is the name of the 1982 sci-fi film featuring a computer program protagonist.",
+    # "What is the name of the sentient computer from 2001: A Space Odyssey?",
+    "What is the meaning of life?",
+    "What is the name of the 1982 sci-fi film featuring a computer program protagonist?",
 )
 max_tokens = {
     "gpt-3.5-turbo": 2**12,
