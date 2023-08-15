@@ -1,6 +1,7 @@
 import json
 import os
 import requests
+import time
 from typing import Any, Dict
 
 
@@ -24,9 +25,20 @@ def _init_session() -> requests.Session:
     return session
 
 
+terminal_errors = ["invalid_request_error"]
+
+
 def post_chat_completion(
-    session: requests.Session, data: Dict[str, Any]
+    session: requests.Session, data: Dict[str, Any], retries: int = 4
 ) -> requests.Response:
     path = ENDPOINT_OPENAI_API_CHAT_COMPLETIONS
     url = f"https://{SERVER_OPENAI_API}{path}"
-    return session.post(url, data=json.dumps(data))
+    while retries > 0:
+        response = session.post(url, data=json.dumps(data))
+        results = json.loads(response.text)
+        if response.status_code == 200 or results["error"]["type"] in terminal_errors:
+            break
+        # print(response)
+        # print(response.text)
+        time.sleep(15.0)
+    return response
