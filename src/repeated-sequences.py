@@ -27,24 +27,24 @@ max_tokens = {
     "gpt-4-32k": 2**15,
 }
 
-control_sequences = set(
+sequences = set(
     # all 1-byte characters (i.e., '\b')
     [chr(i) for i in range(256)]
 )
-control_sequences.update(
+sequences.update(
     # all possible 2-byte sequences (i.e., r'\b')
     set([f"\{chr(i)}" for i in range(256)])
 )
-control_sequences.update(
+sequences.update(
     # all possible space-character sequences (i.e., ' \b')
     set([f" {chr(i)}" for i in range(256)])
 )
-control_sequences.update(
+sequences.update(
     # additional 4-byte sequences (i.e., r'\x08')
     set([chr(i).encode("unicode_escape").decode() for i in range(256)])
 )
-control_sequences = list(control_sequences)
-control_sequences.sort()
+sequences = list(sequences)
+sequences.sort()
 
 
 def two_questions_one_prompt(
@@ -100,7 +100,7 @@ Please provide your response in the form of a Python Tuple[bool, str] as below:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Performs repeated control sequence experiments to determine strength of effect"
+        description="Performs repeated sequence experiments to determine strength of effect"
     )
     parser.add_argument(
         "model", help="OpenAI model to use in experiments", choices=max_tokens.keys()
@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
     session = _init_session()
 
-    for control_sequence in control_sequences:
+    for sequence in sequences:
         okay = True
         diff = max_tokens[args.model] // 2
         count = max_tokens[args.model] // 2
@@ -125,7 +125,7 @@ if __name__ == "__main__":
                     session,
                     questions[0],
                     questions[1],
-                    control_sequence * count,
+                    sequence * count,
                     args.model,
                 )
                 answer = results["choices"][0]
@@ -145,20 +145,20 @@ if __name__ == "__main__":
                 okay_str = "Error"
                 okay = False
                 reason = e
-            repr_control_sequence = repr(control_sequence)
-            printable_control_sequence = f'"{control_sequence}"'
-            if not control_sequence.isprintable():
-                printable_control_sequence = "NONP"
-            if len(control_sequence) == 1:
-                hex_control_sequence = f"({hex(ord(control_sequence))})"
+            repr_sequence = repr(sequence)
+            printable_sequence = f'"{sequence}"'
+            if not sequence.isprintable():
+                printable_sequence = "NONP"
+            if len(sequence) == 1:
+                hex_sequence = f"({hex(ord(sequence))})"
             else:
-                hex_control_sequence = f"(0x{control_sequence.encode('latin-1').hex()})"
+                hex_sequence = f"(0x{sequence.encode('latin-1').hex()})"
             diff //= 2
             # head = "TEST" if end_diff <= diff or okay and diff else "DONE"
             head = "TEST" if math.log2(count) <= math.log2(diff) + 5.0 else "DONE"
             print(
                 f"{head} {timestamp: >24} {model_str: <20} {count: >5} {okay_str: >5} "
-                f"{prompt_tokens: >10} {len(control_sequence)} {repr_control_sequence: >12} "
-                f'{printable_control_sequence: >12} {hex_control_sequence: <12} "{reason}"'
+                f"{prompt_tokens: >10} {len(sequence)} {repr_sequence: >12} "
+                f'{printable_sequence: >12} {hex_sequence: <12} "{reason}"'
             )
             count += diff if okay else -diff
