@@ -14,7 +14,29 @@ All scripts and supporting code can be found within the `src` subdirectory.
 
 ### `question-with-context.py`
 
-The `question-with-context.py` script demonstrates a basic example of prompt injection using control characters to manipulate the behavior of a hypothetical application. An initial implementation of this script was utilized to describe an initial result in a [Dropbox technical blog post](https://dropbox.tech/machine-learning/prompt-injection-with-control-characters-openai-chatgpt-llm).
+The `question-with-context.py` script demonstrates examples of prompt injection using repeated character sequences (control characters and "space-character" combinations) to manipulate the behavior of a hypothetical OpenAI Chat LLM-powered question-and-answer (QnA) application. An initial implementation of this script was utilized to describe an initial result in a [Dropbox technical blog post](https://dropbox.tech/machine-learning/prompt-injection-with-control-characters-openai-chatgpt-llm).
+
+The current implementation takes a sampling of strongest-effect character sequences from the `repeated-sequences.py` experiments described below and demonstrates how the repeated sequence attack affects LLM output for a QnA prompt.
+
+#### GPT-3.5
+
+Testing on 2023-08-16 revealed `gpt-3.5-turbo` prompt instruction betrayal and hallucinations at higher repeat counts for sequences with stronger effect, such as `" I"`.
+
+|                  ![control-sequences.png](./png/qna_gpt-3.5-turbo.png)                   |
+| :--------------------------------------------------------------------------------------: |
+| _Repetitions of `" I"` induced `gpt-3.5-turbo` instruction betrayal and hallucinations._ |
+
+#### GPT-4
+
+Testing on 2023-08-16 revealed `gpt-4` prompt instruction betrayal and hallucinations at higher repeat counts for sequences with stronger effect, such as `" a"`.
+
+|     ![control-sequences.png](./png/qna_gpt-4_0.png)     |
+| :-----------------------------------------------------: |
+| _Repetitions of `" a"` induced `gpt-4` hallucinations._ |
+
+|                      ![control-sequences.png](./png/qna_gpt-4_1.png)                       |
+| :----------------------------------------------------------------------------------------: |
+| _Repetitions of `" a"` induced `gpt-4` instruction betrayal and potential prompt leakage._ |
 
 ### `repeated-sequences.py`
 
@@ -150,7 +172,7 @@ export OPENAI_API_KEY=sk-...
 4. Run the demonstration scripts with Python 3:
 
 ```bash
-python3 question-with-context.py
+python3 question-with-context.py {gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,gpt-4-32k}
 python3 repeated-sequences.py {gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,gpt-4-32k}
 ```
 

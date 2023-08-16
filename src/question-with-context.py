@@ -40,7 +40,7 @@ experiments = {
         "repeats": [0, 256, 512, 1024, 2048, 4096, 8192, 15700],
     },
     "gpt-4": {
-        "sequences": [' "', " a", "\\\n", "Á", " $"],
+        "sequences": [" a", ' "', "\\\n", "Á", " $"],
         "repeats": [0, 1024, 2048, 4096, 7600],
     },
     "gpt-4-32k": {
@@ -115,13 +115,14 @@ if __name__ == "__main__":
             print("#" * 80 + "\n")
             for repeats in experiment["repeats"]:
                 try:
+                    the_question = sequence * repeats + question
                     print(f'Context: "{args.context}"')
-                    print(f"  Q: {format_short_question(question, sequence)}")
+                    print(f"  Q: {format_short_question(the_question, sequence)}")
                     results = question_with_context(
                         session,
                         args.idk,
                         args.context,
-                        sequence * repeats + question,
+                        the_question,
                         args.model,
                     )
                     timestamp = datetime.utcfromtimestamp(results["created"]).strftime(
