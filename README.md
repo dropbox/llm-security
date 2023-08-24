@@ -1,6 +1,6 @@
 # llm-security
 
-This repository contains scripts and related documentation that demonstrate attacks against large language models using control character sequences. These techniques can be used to execute prompt injection on content-constrained LLM queries.
+This repository contains scripts and related documentation that demonstrate attacks against large language models using repeated character sequences. These techniques can be used to execute prompt injection on content-constrained LLM queries.
 
 **Disclaimer: This repository is created purely for educational purposes to raise awareness about security vulnerabilities. Do not use these scripts for any malicious or illegal activities.**
 
