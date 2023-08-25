@@ -189,7 +189,7 @@ Many thanks to our friends internal and external to Dropbox for supporting this 
 Unless otherwise noted:
 
 ```
-Copyright (c) 2016 Dropbox, Inc.
+Copyright (c) 2023 Dropbox, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
