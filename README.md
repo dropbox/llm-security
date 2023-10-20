@@ -6,7 +6,7 @@ This repository contains scripts and related documentation that demonstrate atta
 
 ## Introduction
 
-Prompt injection is a type of attack where an attacker provides specially crafted input to an application that is then executed within the context of the application's commands or queries. This can lead to unintended behavior, data leaks, or even complete system compromise. This repository contains example scripts that demonstrate prompt injection using control character sequences, and calculates the effectiveness of the technique across different character sequence encodings.
+Prompt injection is a type of attack where an attacker provides specially crafted input to an application that is then utilized within the textual prompt of an LLM request. This can lead to unintended behavior, data leaks, or even complete system compromise. This repository contains example scripts that demonstrate prompt injection using control character sequences, and calculates the effectiveness of the technique across different character sequence encodings.
 
 ## Scripts
 
