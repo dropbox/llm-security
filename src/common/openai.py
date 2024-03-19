@@ -10,6 +10,13 @@ from typing import Any, Dict
 SERVER_OPENAI_API = "api.openai.com"
 ENDPOINT_OPENAI_API_CHAT_COMPLETIONS = "/v1/chat/completions"
 
+max_tokens = {
+    "gpt-3.5-turbo": 2**12,
+    "gpt-3.5-turbo-16k": 2**14,
+    "gpt-4": 2**13,
+    "gpt-4-32k": 2**15,
+}
+
 
 def _init_session() -> requests.Session:
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
