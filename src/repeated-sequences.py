@@ -9,42 +9,17 @@ from typing import Any, Dict, List, Tuple
 import requests
 
 from common.openai import (
-    SERVER_OPENAI_API,
-    ENDPOINT_OPENAI_API_CHAT_COMPLETIONS,
     _init_session,
+    max_tokens,
     post_chat_completion,
 )
+from common.strings import get_dropbox_strings
 
 questions = (
     # "What is the name of the sentient computer from 2001: A Space Odyssey?",
     "What is the meaning of life?",
     "What is the name of the 1982 sci-fi film featuring a computer program protagonist?",
 )
-max_tokens = {
-    "gpt-3.5-turbo": 2**12,
-    "gpt-3.5-turbo-16k": 2**14,
-    "gpt-4": 2**13,
-    "gpt-4-32k": 2**15,
-}
-
-sequences = set(
-    # all 1-byte characters (i.e., '\b')
-    [chr(i) for i in range(256)]
-)
-sequences.update(
-    # all possible 2-byte sequences (i.e., r'\b')
-    set([f"\{chr(i)}" for i in range(256)])
-)
-sequences.update(
-    # all possible space-character sequences (i.e., ' \b')
-    set([f" {chr(i)}" for i in range(256)])
-)
-sequences.update(
-    # additional 4-byte sequences (i.e., r'\x08')
-    set([chr(i).encode("unicode_escape").decode() for i in range(256)])
-)
-sequences = list(sequences)
-sequences.sort()
 
 
 def two_questions_one_prompt(
@@ -115,7 +90,7 @@ if __name__ == "__main__":
 
     session = _init_session()
 
-    for sequence in sequences:
+    for sequence in get_dropbox_strings():
         okay = True
         diff = max_tokens[args.model] // 2
         count = max_tokens[args.model] // 2

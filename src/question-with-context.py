@@ -5,8 +5,6 @@ from datetime import datetime
 from typing import Any, Dict, List
 
 from common.openai import (
-    SERVER_OPENAI_API,
-    ENDPOINT_OPENAI_API_CHAT_COMPLETIONS,
     _init_session,
     post_chat_completion,
 )
