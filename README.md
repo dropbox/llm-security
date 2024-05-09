@@ -220,24 +220,51 @@ As shown here, different character sequences have differing magnitudes of "black
 git clone https://github.com/dropbox/llm-security.git
 ```
 
-2. Navigate to the repository's scripts directory:
+2. Navigate to the repository directory:
 
 ```bash
-cd prompt-injection
+cd llm-security
 ```
 
-3. Set the `OPENAI_API_KEY` API key to your secret value:
+3. Navigate to the repository's scripts directory:
 
 ```bash
-export OPENAI_API_KEY=sk-...
+cd src
 ```
 
-4. Run the demonstration scripts with Python 3:
+4. Navigate to `https://platform.openai.com/signup`. Create an account or log in. In the left sidebar, click API keys. Create a secret key if you don't have one already that you want to use. Copy and save your API Key. Insert your API in the following quotation depending on your platform:
+
+If you're using a Unix-based shell, such as Bash or Zsh (MacOS/Linux):
+
+```bash
+export OPENAI_API_KEY="insert_api_key_here"
+```
+
+If you're using Powershell (Windows):
+
+```bash
+$env:"insert_api_key_here"
+```
+
+5. Run the demonstration scripts with Python 3. Choose the specific model and properties you want to choose:
+
 
 ```bash
 python3 repeated-tokens.py {gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,gpt-4-32k} {sample,single}
 python3 question-with-context.py {gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,gpt-4-32k}
 python3 repeated-sequences.py {gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,gpt-4-32k}
+```
+
+Command of Running Script Example:
+
+```bash
+python3 repeated-tokens.py gpt-3.5-turbo sample
+```
+
+If python3 doesn't work, use python as in the following:
+
+```bash
+python repeated-tokens.py gpt-3.5-turbo sample
 ```
 
 ## Contributing
