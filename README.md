@@ -217,7 +217,7 @@ As shown here, different character sequences have differing magnitudes of "black
 1. Clone this repository to your local machine using:
 
 ```bash
-git clone https://github.com/dropbox/llm-attacks.git
+git clone https://github.com/dropbox/llm-security.git
 ```
 
 2. Navigate to the repository's scripts directory:
