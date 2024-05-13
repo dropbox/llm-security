@@ -250,18 +250,6 @@ python3 question-with-context.py {gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,gpt-4-32
 python3 repeated-sequences.py {gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,gpt-4-32k}
 ```
 
-Command of Running Script Example:
-
-```bash
-python3 repeated-tokens.py gpt-3.5-turbo sample
-```
-
-If python3 doesn't work, use python as in the following:
-
-```bash
-python repeated-tokens.py gpt-3.5-turbo sample
-```
-
 ## Contributing
 
 Create a new pull request through the GitHub interface!
