@@ -232,22 +232,13 @@ If you're using a Unix-based shell, such as `bash` or `zsh` (MacOS/Linux):
 export OPENAI_API_KEY=<insert_api_key_here>
 ```
 
-
-4. Navigate to the link `https://platform.openai.com/signup`. Create an account or log in. In the left sidebar, click API keys. Create a secret key if you don't have one already that you want to use. Copy and save your API Key. Insert your API in the following quotation depending on your platform:
-
-If you're using a Unix-based shell, such as Bash or Zsh (MacOS/Linux):
-
-```bash
-export OPENAI_API_KEY="<insert_api_key_here>"
-```
-
 If you're using Powershell (Windows):
 
 ```bash
 $env:"<insert_api_key_here>"
 ```
 
-5. Run the demonstration scripts with Python 3. Choose the specific model and properties you want to choose:
+4. Run the demonstration scripts with Python 3. Choose the specific model and properties you want to choose:
 
 
 ```bash
