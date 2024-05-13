@@ -229,8 +229,6 @@ cd llm-security
 3. Navigate to the repository's scripts directory:
 
 ```bash
-cd src
-```
 
 4. Navigate to the link `https://platform.openai.com/signup`. Create an account or log in. In the left sidebar, click API keys. Create a secret key if you don't have one already that you want to use. Copy and save your API Key. Insert your API in the following quotation depending on your platform:
 
