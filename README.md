@@ -226,19 +226,25 @@ git clone https://github.com/dropbox/llm-security.git
 cd llm-security/src
 ```
 
+3. [Create an OpenAI account or log in](https://platform.openai.com/signup). In your account, browse to [API keys](https://platform.openai.com/api-keys) and create a key, if necessary. Copy your API key of choice and use as instructed below.
+If you're using a Unix-based shell, such as `bash` or `zsh` (MacOS/Linux):
+```bash
+export OPENAI_API_KEY=<insert_api_key_here>
+```
+
 
 4. Navigate to the link `https://platform.openai.com/signup`. Create an account or log in. In the left sidebar, click API keys. Create a secret key if you don't have one already that you want to use. Copy and save your API Key. Insert your API in the following quotation depending on your platform:
 
 If you're using a Unix-based shell, such as Bash or Zsh (MacOS/Linux):
 
 ```bash
-export OPENAI_API_KEY="insert_api_key_here"
+export OPENAI_API_KEY="<insert_api_key_here>"
 ```
 
 If you're using Powershell (Windows):
 
 ```bash
-$env:"insert_api_key_here"
+$env:"<insert_api_key_here>"
 ```
 
 5. Run the demonstration scripts with Python 3. Choose the specific model and properties you want to choose:
