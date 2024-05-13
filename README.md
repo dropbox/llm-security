@@ -223,7 +223,7 @@ git clone https://github.com/dropbox/llm-security.git
 2. Navigate to the repository directory:
 
 ```bash
-cd llm-security
+cd llm-security/src
 ```
 
 
