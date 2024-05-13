@@ -220,7 +220,7 @@ As shown here, different character sequences have differing magnitudes of "black
 git clone https://github.com/dropbox/llm-security.git
 ```
 
-2. Navigate to the repository directory:
+2. Navigate to the repository `src` directory:
 
 ```bash
 cd llm-security/src
