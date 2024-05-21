@@ -229,7 +229,7 @@ cd llm-security/src
 3. [Create an OpenAI account or log in](https://platform.openai.com/signup). In your account, browse to [API keys](https://platform.openai.com/api-keys) and create a key, if necessary. Copy your API key of choice and use as instructed below.
 If you're using a Unix-based shell, such as `bash` or `zsh` (MacOS/Linux):
 ```bash
-export OPENAI_API_KEY=<insert_api_key_here>
+export OPENAI_API_KEY=sk-...
 ```
 
 If you're using Powershell (Windows):
