@@ -235,7 +235,7 @@ export OPENAI_API_KEY=<insert_api_key_here>
 If you're using Powershell (Windows):
 
 ```bash
-$env:"<insert_api_key_here>"
+$env:OPENAI_API_KEY = "sk-..."
 ```
 
 4. Run the demonstration scripts with Python 3. Choose the specific model and properties you want to choose:
