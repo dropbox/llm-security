@@ -217,22 +217,29 @@ As shown here, different character sequences have differing magnitudes of "black
 1. Clone this repository to your local machine using:
 
 ```bash
-git clone https://github.com/dropbox/llm-attacks.git
+git clone https://github.com/dropbox/llm-security.git
 ```
 
-2. Navigate to the repository's scripts directory:
+2. Navigate to the repository `src` directory:
 
 ```bash
-cd prompt-injection
+cd llm-security/src
 ```
 
-3. Set the `OPENAI_API_KEY` API key to your secret value:
-
+3. [Create an OpenAI account or log in](https://platform.openai.com/signup). In your account, browse to [API keys](https://platform.openai.com/api-keys) and create a key, if necessary. Copy your API key of choice and use as instructed below.
+If you're using a Unix-based shell, such as `bash` or `zsh` (MacOS/Linux):
 ```bash
 export OPENAI_API_KEY=sk-...
 ```
 
-4. Run the demonstration scripts with Python 3:
+If you're using Powershell (Windows):
+
+```bash
+$env:OPENAI_API_KEY = "sk-..."
+```
+
+4. Run the demonstration scripts with Python 3. Choose the specific model and properties you want to choose:
+
 
 ```bash
 python3 repeated-tokens.py {gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,gpt-4-32k} {sample,single}
